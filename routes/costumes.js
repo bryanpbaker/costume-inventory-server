@@ -27,13 +27,7 @@ router.get('/', async (req, res) => {
  */
 router.post('/', async (req, res) => {
   // construct new costume from request body
-  const newCostume = new Costume({
-    name: 'Spider-Man',
-    description: 'Spider-Man costume',
-    piecesOwned: ['mask', 'gloves'],
-    piecesNeeded: ['web shooters', 'boots'],
-    complete: false
-  });
+  const newCostume = new Costume(req.body);
 
   // attempt to save the new costume
   try {
