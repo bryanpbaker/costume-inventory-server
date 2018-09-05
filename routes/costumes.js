@@ -45,4 +45,33 @@ router.post('/', async (req, res) => {
   }
 });
 
+/**
+ * @todo Figure out why it won't update successfully
+ * @route PUT api/v1/costumes/:id
+ * @description update a Costume with the given id
+ */
+router.put('/:id', async (req, res) => {
+  try {
+    // find the costume
+    const costume = await Costume.findById(req.params.id);
+    // update the costume
+    Object.keys(costume.toJSON()).forEach(prop => {
+      costume[prop] = req.body[prop] || costume[prop];
+    });
+
+    // save the costume
+    const savedCostume = await costume.save();
+
+    res.send({
+      success: true,
+      costume: savedCostume
+    });
+  } catch (error) {
+    res.send({
+      success: false,
+      error
+    });
+  }
+});
+
 module.exports = router;
