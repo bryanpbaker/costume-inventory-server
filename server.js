@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 require('dotenv').config();
@@ -8,6 +9,9 @@ const costumes = require('./routes/costumes');
 
 // initialize app
 const app = express();
+
+// enable cors
+app.use(cors());
 
 // Bodyparser Middleware
 app.use(bodyParser.json());
